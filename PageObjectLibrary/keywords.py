@@ -62,7 +62,7 @@ class PageObjectLibraryKeywords(object):
         # If we get here, we're not on the page we think we're on
         raise Exception("Expected page to be %s but it was not" % page_name)
 
-    def go_to_page(self, page_name, page_root = None):
+    def go_to_page(self, page_name, page_root = None, verify=False):
         """Go to the url for the given page object
 
         Unless explicitly provided, the URL root will be based on the
@@ -102,7 +102,8 @@ class PageObjectLibraryKeywords(object):
             self.se2lib.go_to(url)
         # should I be calling this keyword? Should this keyword return
         # true/false, or should it throw an exception?
-        self.the_current_page_should_be(page_name)
+        if verify:
+            self.the_current_page_should_be(page_name)
 
     def _get_page_object(self, page_name):
         """Import the page object if necessary, then return the handle to the library
